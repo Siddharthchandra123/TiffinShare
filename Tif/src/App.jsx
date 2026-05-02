@@ -1,51 +1,25 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
-import IntroPage from "./templates/intropage.jsx";
-import FeedPage from "./templates/FeedPage.jsx";
-import PostPage from "./templates/Postpage.jsx";
-import LoginPage from "./templates/loginpage.jsx";
-import ProfilePage from "./templates/ProfilePage.jsx";
-import ProtectedRoute from "./components/ProtectedRoute.jsx";
-import RegisterPage from "./templates/RegisterPage.jsx";
-import LeaderboardPage from "./templates/LeaderboardPage.jsx";
-import { MealProvider } from "./templates/MealContext.jsx";
-import Layout from "./components/Layout.jsx";
-
+import IntroPage from "./IntroPage.jsx";
+import FeedPage from "./FeedPage.jsx";
+import PostPage from "./PostPage.jsx";
+import { MealProvider } from "./MealContext";
 export default function App() {
   return (
     <MealProvider>
-      <Router>
-        <Layout>
-          <Routes>
-            {/* 🌐 PUBLIC ROUTES */}
-            <Route path="/" element={<IntroPage />} />
-            <Route path="/login" element={<LoginPage />} />
-            <Route path="/register" element={<RegisterPage />} />
-            <Route path="/home" element={<FeedPage />} />
-            <Route path="/leaderboard" element={<LeaderboardPage />} />
+    <Router>
+      
+        <Routes>
+          {/* Landing Page */}
+        <Route path="/" element={<IntroPage />} />
 
-            {/* 🔐 PROTECTED ROUTES */}
-            <Route
-              path="/postmeals"
-              element={
-                <ProtectedRoute>
-                  <PostPage />
-                </ProtectedRoute>
-              }
-            />
-
-            <Route
-              path="/profile"
-              element={
-                <ProtectedRoute>
-                  <ProfilePage />
-                </ProtectedRoute>
-              }
-            />
-          </Routes>
-        </Layout>
-      </Router>
-    </MealProvider>
+        {/* Home / Feed Page */}
+        <Route path="/home" element={<FeedPage />} />
+        
+        <Route path="/postmeals" element={<PostPage />} />
+      </Routes>
+    </Router>
+      </MealProvider>
   );
 }
