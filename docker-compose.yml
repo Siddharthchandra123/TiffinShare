@@ -22,7 +22,7 @@ services:
     build: ./Tif
     container_name: tiffin-frontend
     ports:
-      - "5173:5173"
+      - "5173:80"
     environment:
       - VITE_API_URL=http://localhost:5000
     depends_on:

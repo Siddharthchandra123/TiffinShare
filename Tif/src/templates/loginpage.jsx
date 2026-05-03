@@ -1,9 +1,15 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 
 export default function LoginPage() {
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (localStorage.getItem("token")) {
+      navigate("/home");
+    }
+  }, [navigate]);
 
   const [form, setForm] = useState({
     email: "",
@@ -50,7 +56,7 @@ export default function LoginPage() {
       >
         <div className="absolute top-[-50px] right-[-50px] w-32 h-32 bg-orange-500/30 blur-3xl rounded-full pointer-events-none"></div>
 
-        <h2 className="text-3xl font-bold text-center mb-6 text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-orange-600 glow-text">
+        <h2 className="text-3xl font-bold text-center mb-6 text-transparent bg-clip-text bg-gradient-to-r from-primary to-orange-400">
           Welcome Back 🍱
         </h2>
 
@@ -58,7 +64,7 @@ export default function LoginPage() {
           <motion.p
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            className="text-red-400 text-sm mb-4 text-center bg-red-500/10 p-2 rounded"
+            className="text-destructive text-sm mb-4 text-center bg-destructive/10 p-2 rounded"
           >
             {error}
           </motion.p>
@@ -83,16 +89,16 @@ export default function LoginPage() {
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
             onClick={handleLogin}
-            className="w-full bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-400 hover:to-orange-500 text-white font-semibold py-3 rounded-lg transition-all shadow-lg shadow-orange-500/25 mt-4"
+            className="w-full bg-primary hover:opacity-90 text-primary-foreground font-semibold py-3 rounded-lg transition-all shadow-lg shadow-primary/20 mt-4"
           >
             Login 🚀
           </motion.button>
         </div>
 
-        <p className="text-sm text-gray-400 mt-6 text-center">
+        <p className="text-sm text-muted-foreground mt-6 text-center">
           Don't have an account?{" "}
           <span
-            className="text-orange-400 cursor-pointer hover:underline"
+            className="text-primary cursor-pointer hover:underline font-medium"
             onClick={() => navigate("/register")}
           >
             Register

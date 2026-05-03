@@ -40,12 +40,12 @@ export default function FeedPage() {
   return (
     <div className="px-6 py-10 max-w-7xl mx-auto relative">
       <div className="flex justify-between items-center mb-10">
-        <h2 className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-yellow-500">
+        <h2 className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-primary to-orange-400">
           Available Meals 🍽️
         </h2>
         <button
           onClick={() => navigate("/postmeals")}
-          className="bg-orange-500/10 text-orange-400 border border-orange-500/30 hover:bg-orange-500 hover:text-white px-4 py-2 rounded-lg transition-all"
+          className="bg-primary/10 text-primary border border-primary/30 hover:bg-primary hover:text-primary-foreground px-4 py-2 rounded-lg transition-all"
         >
           + Post Meal
         </button>
@@ -53,12 +53,12 @@ export default function FeedPage() {
 
       {isLoading ? (
         <div className="flex justify-center items-center h-64">
-          <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-orange-500"></div>
+          <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-primary"></div>
         </div>
       ) : meals.length === 0 ? (
         <div className="glass-card text-center py-16">
-          <p className="text-xl text-gray-400">No meals available right now 😔</p>
-          <p className="text-sm text-gray-500 mt-2">Check back later or post one yourself!</p>
+          <p className="text-xl text-muted-foreground">No meals available right now 😔</p>
+          <p className="text-sm text-muted-foreground/80 mt-2">Check back later or post one yourself!</p>
         </div>
       ) : (
         <motion.div
@@ -84,7 +84,7 @@ export default function FeedPage() {
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
                 <div className="absolute bottom-4 left-4 right-4 flex justify-between items-end">
                   <h3 className="text-xl font-bold text-white leading-tight max-w-[70%]">{meal.dish}</h3>
-                  <div className="bg-orange-500/80 backdrop-blur-sm text-white text-xs font-bold px-2 py-1 rounded-lg shadow-sm whitespace-nowrap">
+                  <div className="bg-primary/80 backdrop-blur-sm text-white text-xs font-bold px-2 py-1 rounded-lg shadow-sm whitespace-nowrap">
                     ₹{meal.priceMin}{meal.priceMin !== meal.priceMax ? ` - ${meal.priceMax}` : ''}
                   </div>
                 </div>
@@ -92,8 +92,8 @@ export default function FeedPage() {
 
               {/* Content Section */}
               <div className="p-5 flex-grow flex flex-col justify-between space-y-4">
-                <div className="flex items-center space-x-3 pb-3 border-b border-white/5">
-                  <div className="w-10 h-10 rounded-full bg-gray-800 overflow-hidden border border-white/10">
+                <div className="flex items-center space-x-3 pb-3 border-b border-border">
+                  <div className="w-10 h-10 rounded-full bg-secondary overflow-hidden border border-border">
                     {meal.userId?.avatar ? (
                       <img src={meal.userId.avatar} alt="chef" className="w-full h-full object-cover" />
                     ) : (
@@ -101,10 +101,10 @@ export default function FeedPage() {
                     )}
                   </div>
                   <div className="flex-grow">
-                    <p className="text-sm font-medium text-gray-200 line-clamp-1">{meal.userId?.name || "Anonymous Chef"}</p>
+                    <p className="text-sm font-medium text-foreground line-clamp-1">{meal.userId?.name || "Anonymous Chef"}</p>
                     <div className="flex items-center text-xs text-yellow-400">
                       <span>★</span>
-                      <span className="ml-1 text-gray-400">
+                      <span className="ml-1 text-muted-foreground">
                         {meal.userId?.ratingAverage ? meal.userId.ratingAverage.toFixed(1) : "New"} 
                         {meal.userId?.ratingCount ? ` (${meal.userId.ratingCount})` : ""}
                       </span>
@@ -113,10 +113,10 @@ export default function FeedPage() {
                 </div>
 
                 <div className="space-y-2">
-                  <div className="flex items-center text-sm text-gray-400">
+                  <div className="flex items-center text-sm text-muted-foreground">
                     <span className="mr-2">⏰</span> {meal.time}
                   </div>
-                  <div className="flex items-center text-sm text-gray-400">
+                  <div className="flex items-center text-sm text-muted-foreground">
                     <span className="mr-2">📍</span> {meal.location}
                   </div>
                 </div>
@@ -148,7 +148,7 @@ export default function FeedPage() {
                       alert("Server error");
                     }
                   }}
-                  className="w-full mt-2 bg-white/5 hover:bg-orange-500 border border-white/10 hover:border-orange-500 text-white font-medium py-2.5 rounded-lg transition-all shadow-sm"
+                  className="w-full mt-2 bg-secondary hover:bg-primary border border-border hover:border-primary text-foreground hover:text-primary-foreground font-medium py-2.5 rounded-lg transition-all shadow-sm"
                 >
                   Claim Meal
                 </button>

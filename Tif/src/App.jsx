@@ -10,13 +10,15 @@ import ProtectedRoute from "./components/ProtectedRoute.jsx";
 import RegisterPage from "./templates/RegisterPage.jsx";
 import LeaderboardPage from "./templates/LeaderboardPage.jsx";
 import { MealProvider } from "./templates/MealContext.jsx";
+import { ThemeProvider } from "./context/ThemeContext.jsx";
 import Layout from "./components/Layout.jsx";
 
 export default function App() {
   return (
-    <MealProvider>
-      <Router>
-        <Layout>
+    <ThemeProvider>
+      <MealProvider>
+        <Router>
+          <Layout>
           <Routes>
             {/* 🌐 PUBLIC ROUTES */}
             <Route path="/" element={<IntroPage />} />
@@ -46,6 +48,7 @@ export default function App() {
           </Routes>
         </Layout>
       </Router>
-    </MealProvider>
+      </MealProvider>
+    </ThemeProvider>
   );
 }

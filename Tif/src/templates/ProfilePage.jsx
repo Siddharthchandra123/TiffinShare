@@ -86,7 +86,7 @@ export default function ProfilePage() {
     if(meals.length === 0) {
       return (
         <div className="text-center py-12">
-          <p className="text-gray-500">No meals found.</p>
+          <p className="text-muted-foreground">No meals found.</p>
         </div>
       );
     }
@@ -94,25 +94,25 @@ export default function ProfilePage() {
     return (
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         {meals.map(meal => (
-          <div key={meal._id} className="bg-white/5 border border-white/10 rounded-xl p-4 flex gap-4">
+          <div key={meal._id} className="bg-secondary border border-border rounded-xl p-4 flex gap-4">
             <img 
               src={meal.image || "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?q=80&w=800"} 
               className="w-20 h-20 rounded-lg object-cover" 
               alt={meal.dish} 
             />
             <div className="flex-grow">
-              <h4 className="font-bold text-lg text-white leading-tight">{meal.dish}</h4>
-              <p className="text-orange-400 text-sm font-semibold">₹{meal.priceMin} - ₹{meal.priceMax}</p>
+              <h4 className="font-bold text-lg text-foreground leading-tight">{meal.dish}</h4>
+              <p className="text-primary text-sm font-semibold">₹{meal.priceMin} - ₹{meal.priceMax}</p>
               
               {isClaimsTab ? (
                 <div>
-                  <p className="text-xs text-gray-400 mt-2 mb-2">
-                    Chef: <span className="text-gray-200">{meal.userId?.name || "Unknown"}</span>
+                  <p className="text-xs text-muted-foreground mt-2 mb-2">
+                    Chef: <span className="text-foreground">{meal.userId?.name || "Unknown"}</span>
                   </p>
                   {meal.rating ? (
-                    <div className="bg-black/20 p-2 rounded border border-white/5 mt-2">
+                    <div className="bg-secondary p-2 rounded border border-border mt-2">
                       <div className="text-yellow-400 text-xs">{"★".repeat(meal.rating)}</div>
-                      <p className="text-xs text-gray-300 italic mt-1">"{meal.reviewText}"</p>
+                      <p className="text-xs text-muted-foreground italic mt-1">"{meal.reviewText}"</p>
                     </div>
                   ) : (
                     <button
@@ -120,7 +120,7 @@ export default function ProfilePage() {
                         setSelectedMeal(meal);
                         setRatingModalOpen(true);
                       }}
-                      className="text-xs border border-orange-500/50 text-orange-400 hover:bg-orange-500/20 px-3 py-1.5 rounded-md transition-colors w-full mt-1"
+                      className="text-xs border border-primary text-primary hover:bg-primary/10 px-3 py-1.5 rounded-md transition-colors w-full mt-1"
                     >
                       Leave Review
                     </button>
@@ -159,15 +159,15 @@ export default function ProfilePage() {
       >
         <div className="absolute top-[-50px] left-[-50px] w-40 h-40 bg-purple-500/20 blur-3xl rounded-full pointer-events-none"></div>
 
-        <div className="flex justify-between items-start mb-8 border-b border-white/10 pb-6">
+        <div className="flex justify-between items-start mb-8 border-b border-border pb-6">
           <div>
-            <h2 className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-orange-600 mb-2">
+            <h2 className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-primary to-orange-400 mb-2">
               Dashboard
             </h2>
-            <div className="flex items-center space-x-1 bg-black/30 px-3 py-1.5 rounded-full border border-white/5 inline-flex">
+            <div className="flex items-center space-x-1 bg-secondary px-3 py-1.5 rounded-full border border-border inline-flex">
               <span className="text-yellow-400 text-lg">★</span>
-              <span className="font-bold text-white">{profile.ratingAverage ? profile.ratingAverage.toFixed(1) : "New"}</span>
-              <span className="text-xs text-gray-400 ml-1">({profile.ratingCount || 0} ratings)</span>
+              <span className="font-bold text-foreground">{profile.ratingAverage ? profile.ratingAverage.toFixed(1) : "New"}</span>
+              <span className="text-xs text-muted-foreground ml-1">({profile.ratingCount || 0} ratings)</span>
             </div>
           </div>
           
@@ -180,15 +180,15 @@ export default function ProfilePage() {
         </div>
 
         {/* TABS */}
-        <div className="flex space-x-2 mb-8 bg-black/20 p-1 rounded-lg border border-white/5">
+        <div className="flex space-x-2 mb-8 bg-secondary p-1 rounded-lg border border-border">
           {["profile", "posts", "claims"].map((tab) => (
             <button
               key={tab}
               onClick={() => setActiveTab(tab)}
               className={`flex-1 py-2 text-sm font-medium rounded-md transition-all ${
                 activeTab === tab 
-                ? "bg-orange-500/20 text-orange-400 shadow-sm" 
-                : "text-gray-400 hover:text-gray-200 hover:bg-white/5"
+                ? "bg-primary text-primary-foreground shadow-sm" 
+                : "text-muted-foreground hover:text-foreground hover:bg-secondary"
               }`}
             >
               {tab === "profile" && "Profile Data"}
@@ -206,7 +206,7 @@ export default function ProfilePage() {
               initial={{ opacity: 0, x: -10 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: 10 }}
             >
               <div className="flex flex-col sm:flex-row gap-8 items-start mb-8">
-                <div className="w-32 h-32 rounded-full overflow-hidden border-2 border-orange-500/50 flex-shrink-0 bg-gray-800">
+                <div className="w-32 h-32 rounded-full overflow-hidden border-2 border-primary flex-shrink-0 bg-secondary">
                   {profile.avatar ? (
                     <img src={profile.avatar} alt="Avatar" className="w-full h-full object-cover" />
                   ) : (
@@ -262,23 +262,23 @@ export default function ProfilePage() {
                 whileTap={{ scale: 0.99 }}
                 onClick={saveProfile}
                 disabled={isLoading}
-                className="w-full mt-8 bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-400 hover:to-orange-500 text-white font-semibold py-3 rounded-lg transition-all shadow-lg shadow-orange-500/25"
+                className="w-full mt-8 bg-primary hover:opacity-90 text-primary-foreground font-semibold py-3 rounded-lg transition-all shadow-lg shadow-primary/20"
               >
                 {isLoading ? "Saving..." : "Save Profile 💾"}
               </motion.button>
 
               {/* Refer and Earn Section */}
-              <div className="mt-8 p-6 rounded-xl border border-orange-500/30 bg-orange-500/5 relative overflow-hidden">
-                <div className="absolute top-[-20px] right-[-20px] w-24 h-24 bg-orange-500/20 blur-2xl rounded-full pointer-events-none"></div>
+              <div className="mt-8 p-6 rounded-xl border border-primary/30 bg-primary/5 relative overflow-hidden">
+                <div className="absolute top-[-20px] right-[-20px] w-24 h-24 bg-primary/20 blur-2xl rounded-full pointer-events-none"></div>
                 <div className="flex justify-between items-center mb-4">
-                  <h3 className="text-xl font-bold text-white flex items-center">
+                  <h3 className="text-xl font-bold text-foreground flex items-center">
                     <span className="mr-2">🎁</span> Refer & Earn
                   </h3>
-                  <div className="bg-orange-500 text-white px-3 py-1 rounded-full text-sm font-bold shadow-md">
+                  <div className="bg-primary text-primary-foreground px-3 py-1 rounded-full text-sm font-bold shadow-md">
                     {profile.points || 0} Points
                   </div>
                 </div>
-                <p className="text-sm text-gray-400 mb-4">
+                <p className="text-sm text-muted-foreground mb-4">
                   Invite your friends to TiffinShare and earn 50 points for every successful sign-up! Rise up the leaderboard and show off your status.
                 </p>
                 <div className="flex space-x-2">
@@ -286,14 +286,14 @@ export default function ProfilePage() {
                     type="text"
                     readOnly
                     value={`http://localhost:5173/register?ref=${profile.referralCode || ""}`}
-                    className="flex-grow px-4 py-2 rounded-lg bg-black/40 border border-white/10 text-gray-300 text-sm focus:outline-none"
+                    className="flex-grow px-4 py-2 rounded-lg bg-secondary border border-border text-foreground text-sm focus:outline-none"
                   />
                   <button
                     onClick={() => {
                       navigator.clipboard.writeText(`http://localhost:5173/register?ref=${profile.referralCode || ""}`);
                       alert("Referral link copied! 📋");
                     }}
-                    className="bg-white/10 hover:bg-white/20 border border-white/10 text-white px-4 py-2 rounded-lg transition-colors text-sm font-medium whitespace-nowrap"
+                    className="bg-secondary hover:bg-secondary/80 border border-border text-foreground px-4 py-2 rounded-lg transition-colors text-sm font-medium whitespace-nowrap"
                   >
                     Copy Link
                   </button>
